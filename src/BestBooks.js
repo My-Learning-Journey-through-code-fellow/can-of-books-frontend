@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React from 'react';
-import App from './App';
+// import App from './App';
 
 class BestBooks extends React.Component {
   constructor(props) {
@@ -12,21 +12,24 @@ class BestBooks extends React.Component {
 
   getBooks = async () => {
     try {
-      let bookData = await axios.get(`${process.env.DB_URL}/books`)
+      let bookData = await axios.get(`${process.env.REACT_APP_SERVER_URL}/books`)
       this.setState({
         books: bookData.data,
       })
+      console.log('hello');
     } catch (error) {
       console.log('We have an error.', error.response);
     }
   }
+
   componentDidMount() {
     this.getBooks();
+    console.log('component mounted');
   }
   /* TODO: Make a GET request to your API to fetch all the books from the database  */
 
   render() {
-    console.log("App State >>>", this.state);
+    console.log("App State >>>", this.state.books);
     /* TODO: render all the books in a Carousel */
 
     return (
