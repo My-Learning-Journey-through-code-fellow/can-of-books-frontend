@@ -78,9 +78,10 @@ deleteBooks = async (id) => {
 
     return (
       <Container fluid id="bestBooksContainer">
+        {this.state.book.length > 0 ? 
         <Carousel loop={true} rows={1} cols={3} id="carousel">
           {this.state.books.map((books, index) => (
-              <Carousel.Item key={index}  className="bookCarousel">
+            <Carousel.Item key={index}  className="bookCarousel">
                 <Card className='bookCard'>
                   <Card.Body>
                     <Card.Title className="bookTitle">
@@ -91,11 +92,11 @@ deleteBooks = async (id) => {
                       Description: {books.overview}
                     </Card.Text>
                     <Card.Img
-                      src={books.image_url}
+                      src={`https://placekitten.com/g/200/200`}
                       alt={books.title}
                       rounded="true"
                       id="cardImg"
-                    />
+                      />
                     <Card.Text className="bookText">
                       {/* Votes: {movie.vote_average} Vote Count: {movie.vote_count}{" "}
                       Popularity: {movie.popularity}{" "} */}
@@ -108,6 +109,8 @@ deleteBooks = async (id) => {
               </Carousel.Item>
             ))}
         </Carousel>
+        : <p>No books available</p>
+    }
       </Container>
     )
   }
