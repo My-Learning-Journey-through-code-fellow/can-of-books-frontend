@@ -3,7 +3,11 @@ import React from 'react';
 import Carousel from "react-bootstrap/Carousel";
 import Container from "react-bootstrap/Container";
 import Card from "react-bootstrap/Card";
+// import { Modal } from 'react-bootstrap';
+import BookFormModal from './BookFormModal.js';
+import { Button } from 'react-bootstrap';
 // import App from './App';
+
 
 class BestBooks extends React.Component {
   constructor(props) {
@@ -25,18 +29,21 @@ class BestBooks extends React.Component {
     }
   }
 //--------------- form submission-----------------------
-handleBookSubmit = (e) => {
-  e.preventDefault();
-  let newBook = {
-    title: e.target.color.value,
-    location: e.target.location.value,
-    description: e.target.description.value,
-    // name: event.target.name.value,
-    // spayNeuter: event.target.spayNeuter.checked,
-  }
-  console.log(newBook);
-  this.postBooks(newBook);
-}
+// handleBookSubmit = (e) => {
+//   e.preventDefault();
+//   // console.log(e.target.description.value)
+//   console.log(e.target.title.value)
+//   const newBook = {
+//     title: e.target.title.value,
+//     // location: e.target.location.value,
+//     description: e.target.description.value,
+//     status: e.target.status.checked
+//     // name: event.target.name.value,
+//     // spayNeuter: event.target.spayNeuter.checked,
+//   }
+//   console.log(newBook);
+//   this.postBooks(newBook);
+// }
 
 postBooks = async (newBookObj) => {
   try {
@@ -73,17 +80,19 @@ deleteBooks = async (id) => {
   /* TODO: Make a GET request to your API to fetch all the books from the database  */
 
   render() {
+    
     console.log("App State >>>", this.state.books);
     /* TODO: render all the books in a Carousel */
 
     return (
       <>
       <Container>
-
+       <BookFormModal
+       postBooks={this.postBooks}/>
       </Container>
 
       <Container fluid id="bestBooksContainer">
-        {this.state.book.length > 0 ? 
+        {this.state.books.length > 0 ? 
         
         <Carousel loop={true} rows={1} cols={3} id="carousel">
           {this.state.books.map((books, index) => (
