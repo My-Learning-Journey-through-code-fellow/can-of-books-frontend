@@ -1,7 +1,7 @@
 import React from "react";
 import { Modal } from "react-bootstrap";
 import Button from "react-bootstrap";
-import Container from "react-bootstrap";
+// import Container from "react-bootstrap";
 import { Form } from "react-bootstrap";
 import { render } from "@testing-library/react";
 
@@ -13,18 +13,28 @@ class BookFormModal extends React.Component {
       // books: []
     }
   }
-
+  handleClose = () => {
+    this.setState({
+      setShow: false
+    })
+  }
+  
+  handleShow = () => {
+    this.setState({
+      setShow: true,
+    })
+  }
   // const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  // const handleClose = () => setShow(false);
+  // const handleShow = () => setShow(true);
   render() {
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button variant="primary" onClick={this.handleShow}>
         Add Books
       </Button>
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={this.show} onHide={this.handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Add your book here</Modal.Title>
         </Modal.Header>
@@ -55,10 +65,10 @@ class BookFormModal extends React.Component {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="secondary" onClick={this.handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={this.handleBookSubmit}>
             Save Changes
           </Button>
         </Modal.Footer>
