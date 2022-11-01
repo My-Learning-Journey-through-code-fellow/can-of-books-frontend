@@ -33,6 +33,7 @@ Clone this repo to your own account with the green "Use this template" button. T
 <!-- See below -->
 
 ## Credit and Collaborations
+
 ## Logistical
 
 What hours will you be available to communicate?
@@ -67,11 +68,9 @@ In what areas do you each want to develop greater strength?
 * Trace: wants to work on back-end
 * Raphael:  wants to work on back-end/front-end communication
 
-
 Knowing that every person in your team needs to understand the code, how do you plan to approach the day-to-day development?
 
 * We will use pair programming to build the code.
-
 
 ## Conflict Resolution
 
@@ -90,8 +89,9 @@ impossible for two people to be at the exact same place in understanding and ski
 
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
 
-Name of feature: ________________________________
-Set up your repositories
+Name of feature:
+
+* Set up your repositories
 
 Estimate of time needed to complete: _____
 
@@ -102,20 +102,9 @@ Finish time: _____
 Actual time needed to complete: _____
 
 ------------------------------------------------------
-Name of feature: ________________________________
+Name of feature:
 
-
-Estimate of time needed to complete: _____
-
-Start time: _____
-
-Finish time: _____
-
-Actual time needed to complete: _____
-
-------------------------------------------------------
-Name of feature: ________________________________
-
+* Storage: As a user, I'd like to view the list of books, so that whenever I visit the page, I can see the a full list of best books.
 
 Estimate of time needed to complete: _____
 
@@ -126,8 +115,22 @@ Finish time: _____
 Actual time needed to complete: _____
 
 ------------------------------------------------------
-Name of feature: ________________________________
+Name of feature:
 
+* Book Component: As a user, I'd like to see the list of books, so that I can see what's recommended to me.
+
+Estimate of time needed to complete: _____
+
+Start time: _____
+
+Finish time: _____
+
+Actual time needed to complete: _____
+
+------------------------------------------------------
+Name of feature:
+
+* Create: As a user, I'd like to add a new book to the shelf, so that I can update the list with my own recommendations.
 
 Estimate of time needed to complete: _____
 

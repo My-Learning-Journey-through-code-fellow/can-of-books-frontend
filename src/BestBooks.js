@@ -24,6 +24,33 @@ class BestBooks extends React.Component {
       console.log('We have an error.', error.response);
     }
   }
+//--------------- form submission-----------------------
+handleBookSubmit = (e) => {
+  e.preventDefault();
+  let newBook = {
+    title: e.target.color.value,
+    location: e.target.location.value,
+    description: e.target.description.value,
+    // name: event.target.name.value,
+    // spayNeuter: event.target.spayNeuter.checked,
+  }
+  console.log(newBook);
+  this.postBooks(newBook);
+}
+
+postBooks = async (newBookObj) => {
+  try {
+    let url = `${process.env.REACT_APP_SERVER_URL}/books`;
+    let createdBook = await axios.post(url, newBookObj);
+    this.setState({
+      books: [...this.state.books, createdBook.data]
+    })
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+//------------------------------------------------------
+
 
   componentDidMount() {
     this.getBooks();
@@ -38,7 +65,7 @@ class BestBooks extends React.Component {
     return (
       <Container fluid id="bestBooksContainer">
         <Carousel loop={true} rows={1} cols={3} id="carousel">
-          {this.props.books.map((books, index) => (
+          {this.state.books.map((books, index) => (
               <Carousel.Item key={index}  className="bookCarousel">
                 <Card className='bookCard'>
                   <Card.Body>
