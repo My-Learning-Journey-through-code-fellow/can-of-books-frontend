@@ -77,8 +77,14 @@ deleteBooks = async (id) => {
     /* TODO: render all the books in a Carousel */
 
     return (
+      <>
+      <Container>
+
+      </Container>
+
       <Container fluid id="bestBooksContainer">
         {this.state.book.length > 0 ? 
+        
         <Carousel loop={true} rows={1} cols={3} id="carousel">
           {this.state.books.map((books, index) => (
             <Carousel.Item key={index}  className="bookCarousel">
@@ -110,8 +116,9 @@ deleteBooks = async (id) => {
             ))}
         </Carousel>
         : <p>No books available</p>
-    }
+      }
       </Container>
+      </>
     )
   }
 }
