@@ -49,6 +49,20 @@ postBooks = async (newBookObj) => {
     console.log(error.message);
   }
 }
+
+deleteBooks = async (id) => {
+  try {
+    let url = `${process.env.REACT_APP_SERVER_URL}/books/${id}`;
+    await axios.delete(url);
+
+    let updatedBooks = this.state.books.filter(book => book._id !== id);
+    this.setState({
+      books: updatedBooks
+    })
+  } catch (error) {
+    console.log(error.message);
+  }
+}
 //------------------------------------------------------
 
 
