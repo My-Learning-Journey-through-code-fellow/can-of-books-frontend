@@ -3,13 +3,21 @@ import { Modal } from "react-bootstrap";
 import Button from "react-bootstrap";
 import Container from "react-bootstrap";
 import { Form } from "react-bootstrap";
+import { render } from "@testing-library/react";
 
 
-function BookFormModal() {
+class BookFormModal extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      // books: []
+    }
+  }
+
   // const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
+  render() {
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
@@ -28,7 +36,7 @@ function BookFormModal() {
                 type="title"
                 placeholder="Add book title here"
                 autoFocus
-              />
+                />
             </Form.Group>
             <Form.Group
               className="mb-3"
@@ -42,7 +50,7 @@ function BookFormModal() {
                 type="status"
                 placeholder="Available?"
                 autoFocus
-              />
+                />
             </Form.Group>
           </Form>
         </Modal.Body>
@@ -58,5 +66,6 @@ function BookFormModal() {
     </>
   );
 }
+}
 
-render(<Example />);
+render(<BookFormModal />);
