@@ -1,5 +1,8 @@
 import axios from 'axios';
 import React from 'react';
+import Carousel from "react-bootstrap/Carousel";
+import Container from "react-bootstrap/Container";
+import Card from "react-bootstrap/Card";
 // import App from './App';
 
 class BestBooks extends React.Component {
@@ -33,15 +36,38 @@ class BestBooks extends React.Component {
     /* TODO: render all the books in a Carousel */
 
     return (
-      <>
-        <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
-
-        {this.state.books.length ? (
-          <p>Book Carousel coming soon</p>
-        ) : (
-          <h3>No Books Found :(</h3>
-        )}
-      </>
+      <Container fluid id="bestBooksContainer">
+        <Carousel loop={true} rows={1} cols={3} id="carousel">
+          {this.props.books.map((books, index) => (
+              <Carousel.Item key={index}  className="bookCarousel">
+                <Card className='bookCard'>
+                  <Card.Body>
+                    <Card.Title className="bookTitle">
+                      {" "}
+                      Title: {books.title}{" "}
+                    </Card.Title>
+                    <Card.Text className="bookDescription">
+                      Description: {books.overview}
+                    </Card.Text>
+                    <Card.Img
+                      src={books.image_url}
+                      alt={books.title}
+                      rounded="true"
+                      id="cardImg"
+                    />
+                    <Card.Text className="bookText">
+                      {/* Votes: {movie.vote_average} Vote Count: {movie.vote_count}{" "}
+                      Popularity: {movie.popularity}{" "} */}
+                    </Card.Text>
+                    <Card.Text className="bookText">
+                      Release Date: {books.released_on}
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+              </Carousel.Item>
+            ))}
+        </Carousel>
+      </Container>
     )
   }
 }
