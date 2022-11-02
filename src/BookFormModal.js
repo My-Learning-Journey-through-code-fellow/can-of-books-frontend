@@ -54,7 +54,7 @@ class BookFormModal extends React.Component {
       <Button variant="primary" onClick={this.handleShow}>
         Add Books
       </Button>
-      <Button variant="dark" onClick={() => {this.props.deleteBooks(this.props.book._id)}}>Delete</Button>
+      {/* <Button variant="dark" onClick={() => {this.props.deleteBooks(this.props.books)}}>Delete</Button> */}
 
       <Modal show={this.state.setShow} onHide={this.handleClose}>
         <Modal.Header closeButton>

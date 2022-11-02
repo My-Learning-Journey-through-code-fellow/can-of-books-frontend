@@ -57,12 +57,12 @@ postBooks = async (newBookObj) => {
   }
 }
 
-deleteBooks = async (id) => {
+deleteBooks = async (bookToBeDeleted) => {
   try {
-    let url = `${process.env.REACT_APP_SERVER_URL}/books/${id}`;
+    let url = `${process.env.REACT_APP_SERVER_URL}/books/${bookToBeDeleted._id}`;
     await axios.delete(url);
 
-    let updatedBooks = this.state.books.filter(book => book._id !== id);
+    let updatedBooks = this.state.books.filter(book => book._id !== bookToBeDeleted._id);
     this.setState({
       books: updatedBooks
     })
@@ -88,37 +88,40 @@ deleteBooks = async (id) => {
       <>
       <Container>
        <BookFormModal
-       postBooks={this.postBooks}/>
+       deleteBooks={this.deleteBooks}
+       postBooks={this.postBooks}
+       books={this.state.books}
+       />
       </Container>
 
       <Container fluid id="bestBooksContainer">
         {this.state.books.length > 0 ? 
         
-        <Carousel loop={true} rows={1} cols={3} id="carousel">
+        <Carousel variant='dark' loop={true} rows={1} cols={3} id="carousel">
           {this.state.books.map((books, index) => (
-            <Carousel.Item key={index}  className="bookCarousel">
+            <Carousel.Item style={{padding: 150}} key={index}  className="bookCarousel">
                 <Card className='bookCard'>
-                  <Card.Body>
+                    <Button variant="dark" style={{width: 'max-content', margin: 'auto'}} onClick={() => {this.deleteBooks(books)}}>Delete</Button>
+                  <Card.Body style={{width: 'max-content', margin: 'auto'}}>
                     <Card.Title className="bookTitle">
                       {" "}
                       Title: {books.title}{" "}
                     </Card.Title>
                     <Card.Text className="bookDescription">
-                      Description: {books.overview}
+                      Description: {books.description}
                     </Card.Text>
-                    <Card.Img
-                      src={`https://placekitten.com/g/200/200`}
+                    <img
+                      src={`https://placekitten.com/g/400/400`}
                       alt={books.title}
                       rounded="true"
                       id="cardImg"
                       />
                     <Card.Text className="bookText">
-                      {/* Votes: {movie.vote_average} Vote Count: {movie.vote_count}{" "}
-                      Popularity: {movie.popularity}{" "} */}
                     </Card.Text>
                     <Card.Text className="bookText">
-                      Release Date: {books.released_on}
+                      Available: {books.status}
                     </Card.Text>
+                    {/* <Button variant="dark" onClick={() => {this.deleteBooks(books)}}>Delete</Button> */}
                   </Card.Body>
                 </Card>
               </Carousel.Item>
