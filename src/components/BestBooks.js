@@ -7,6 +7,7 @@ import Card from "react-bootstrap/Card";
 import BookFormModal from './BookFormModal.js';
 import { Button } from 'react-bootstrap';
 // import App from './App';
+import UpdateBookForm from './UpdateBookForm.js';
 
 
 class BestBooks extends React.Component {
@@ -71,7 +72,26 @@ deleteBooks = async (bookToBeDeleted) => {
   }
 }
 //------------------------------------------------------
+updatedBooks = async (bookToUpdate) => {
+  try {
+    let url = `${process.env.REACT_APP_SERVER_URL}/books/${bookToUpdate._id}`
+    let updatedBook = await axios.put(url, bookToUpdate);
+    
+    let updatedBookArray = this.state.books.map(existingBook => {
+      return existingBook._id === bookToUpdate._id ? updatedBook.data : existingBook;
+    });
 
+    this.setState({
+      books: updatedBookArray
+    });
+
+  } catch (error) {
+    console.log(error.message)
+  }
+}
+
+
+//---------------------------------
 
   componentDidMount() {
     this.getBooks();
@@ -93,7 +113,11 @@ deleteBooks = async (bookToBeDeleted) => {
        books={this.state.books}
        />
       </Container>
-
+      <Container>
+      <UpdateBookForm
+      updatebook={this.updatebook}
+      />
+      </Container>
       <Container fluid id="bestBooksContainer">
         {this.state.books.length > 0 ? 
         
@@ -102,6 +126,9 @@ deleteBooks = async (bookToBeDeleted) => {
             <Carousel.Item style={{padding: 150}} key={index}  className="bookCarousel">
                 <Card className='bookCard'>
                     <Button variant="dark" style={{width: 'max-content', margin: 'auto'}} onClick={() => {this.deleteBooks(books)}}>Delete</Button>
+
+                    <Button variant="info" onClick={() => {this.setState({showUpdateForm: true })}}>Update</Button>
+
                   <Card.Body style={{width: 'max-content', margin: 'auto'}}>
                     <Card.Title className="bookTitle">
                       {" "}
