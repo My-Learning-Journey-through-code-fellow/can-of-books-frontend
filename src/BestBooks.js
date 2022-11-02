@@ -3,7 +3,11 @@ import React from 'react';
 import Carousel from "react-bootstrap/Carousel";
 import Container from "react-bootstrap/Container";
 import Card from "react-bootstrap/Card";
+// import { Modal } from 'react-bootstrap';
+import BookFormModal from './BookFormModal.js';
+import { Button } from 'react-bootstrap';
 // import App from './App';
+
 
 class BestBooks extends React.Component {
   constructor(props) {
@@ -25,18 +29,21 @@ class BestBooks extends React.Component {
     }
   }
 //--------------- form submission-----------------------
-handleBookSubmit = (e) => {
-  e.preventDefault();
-  let newBook = {
-    title: e.target.color.value,
-    location: e.target.location.value,
-    description: e.target.description.value,
-    // name: event.target.name.value,
-    // spayNeuter: event.target.spayNeuter.checked,
-  }
-  console.log(newBook);
-  this.postBooks(newBook);
-}
+// handleBookSubmit = (e) => {
+//   e.preventDefault();
+//   // console.log(e.target.description.value)
+//   console.log(e.target.title.value)
+//   const newBook = {
+//     title: e.target.title.value,
+//     // location: e.target.location.value,
+//     description: e.target.description.value,
+//     status: e.target.status.checked
+//     // name: event.target.name.value,
+//     // spayNeuter: event.target.spayNeuter.checked,
+//   }
+//   console.log(newBook);
+//   this.postBooks(newBook);
+// }
 
 postBooks = async (newBookObj) => {
   try {
@@ -50,12 +57,12 @@ postBooks = async (newBookObj) => {
   }
 }
 
-deleteBooks = async (id) => {
+deleteBooks = async (bookToBeDeleted) => {
   try {
-    let url = `${process.env.REACT_APP_SERVER_URL}/books/${id}`;
+    let url = `${process.env.REACT_APP_SERVER_URL}/books/${bookToBeDeleted._id}`;
     await axios.delete(url);
 
-    let updatedBooks = this.state.books.filter(book => book._id !== id);
+    let updatedBooks = this.state.books.filter(book => book._id !== bookToBeDeleted._id);
     this.setState({
       books: updatedBooks
     })
@@ -73,43 +80,48 @@ deleteBooks = async (id) => {
   /* TODO: Make a GET request to your API to fetch all the books from the database  */
 
   render() {
+    
     console.log("App State >>>", this.state.books);
     /* TODO: render all the books in a Carousel */
 
     return (
       <>
       <Container>
-
+       <BookFormModal
+       deleteBooks={this.deleteBooks}
+       postBooks={this.postBooks}
+       books={this.state.books}
+       />
       </Container>
 
       <Container fluid id="bestBooksContainer">
-        {this.state.book.length > 0 ? 
+        {this.state.books.length > 0 ? 
         
-        <Carousel loop={true} rows={1} cols={3} id="carousel">
+        <Carousel variant='dark' loop={true} rows={1} cols={3} id="carousel">
           {this.state.books.map((books, index) => (
-            <Carousel.Item key={index}  className="bookCarousel">
+            <Carousel.Item style={{padding: 150}} key={index}  className="bookCarousel">
                 <Card className='bookCard'>
-                  <Card.Body>
+                    <Button variant="dark" style={{width: 'max-content', margin: 'auto'}} onClick={() => {this.deleteBooks(books)}}>Delete</Button>
+                  <Card.Body style={{width: 'max-content', margin: 'auto'}}>
                     <Card.Title className="bookTitle">
                       {" "}
                       Title: {books.title}{" "}
                     </Card.Title>
                     <Card.Text className="bookDescription">
-                      Description: {books.overview}
+                      Description: {books.description}
                     </Card.Text>
-                    <Card.Img
-                      src={`https://placekitten.com/g/200/200`}
+                    <img
+                      src={`https://placekitten.com/g/400/400`}
                       alt={books.title}
                       rounded="true"
                       id="cardImg"
                       />
                     <Card.Text className="bookText">
-                      {/* Votes: {movie.vote_average} Vote Count: {movie.vote_count}{" "}
-                      Popularity: {movie.popularity}{" "} */}
                     </Card.Text>
                     <Card.Text className="bookText">
-                      Release Date: {books.released_on}
+                      Available: {books.status}
                     </Card.Text>
+                    {/* <Button variant="dark" onClick={() => {this.deleteBooks(books)}}>Delete</Button> */}
                   </Card.Body>
                 </Card>
               </Carousel.Item>
