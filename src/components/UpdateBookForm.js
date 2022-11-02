@@ -5,31 +5,31 @@ class UpdateBookForm extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-
-    let boookToUpdate = {
+    let bookToUpdate = {
       title: event.target.title.value,
       description: event.target.description.value,
       status: event.target.status.checked,
       _id: this.props.book._id,
       // __v: this.props.book.__v
     }
-    // console.log('UPDATED', boookToUpdate);
+    console.log(bookToUpdate);
 
-    this.props.updateBooks(boookToUpdate);
+    this.props.updateBooks(bookToUpdate);
   }
 
-  render(){
-    return(
+  render() {
+    return (
       <>
-      <Container>
-      <Form onSubmit={this.handleSubmit}>
+        <Container>
+          <Form onSubmit={this.handleSubmit}>
             <Form.Group className="mb-3" controlId="title">
               <Form.Label>Title</Form.Label>
               <Form.Control
-                type="title"
+                type='title'
                 defaultValue={this.props.book.title}
                 autoFocus
-                />
+
+              />
             </Form.Group>
             <Form.Group
               className="mb-3"
@@ -39,13 +39,13 @@ class UpdateBookForm extends React.Component {
               rows={3} type='description'/>
             </Form.Group>
             <Form.Group className="mb-3" controlId="status">
-        <Form.Check type="checkbox" defaultChecked={this.props.book.status} label="Available" />
-      </Form.Group>
-          <Button variant="primary" type="submit">
-          Save Changes
-        </Button>
+              <Form.Check type="checkbox" defaultChecked={this.props.book.status} label="Available" />
+            </Form.Group>
+            <Button variant="primary" type="submit">
+              Save Changes
+            </Button>
           </Form>
-                </Container>
+        </Container>
       </>
     )
   }

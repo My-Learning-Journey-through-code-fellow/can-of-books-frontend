@@ -12,8 +12,8 @@ class BookFormModal extends React.Component {
     super(props);
 
     this.state = {
-      setShow: false
-      // books: []
+      setShow: false,
+      books: []
     }
   }
 
@@ -38,7 +38,7 @@ class BookFormModal extends React.Component {
       setShow: false
     })
   }
-  
+
   handleShow = () => {
     this.setState({
       setShow: true,
@@ -49,50 +49,50 @@ class BookFormModal extends React.Component {
   // const handleShow = () => setShow(true);
   render() {
 
-  return (
-    <>
-      <Button variant="primary" onClick={this.handleShow}>
-        Add Books
-      </Button>
-      {/* <Button variant="dark" onClick={() => {this.props.deleteBooks(this.props.books)}}>Delete</Button> */}
-
-      <Modal show={this.state.setShow} onHide={this.handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Add your book here</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form onSubmit={this.handleBookSubmit}>
-            <Form.Group className="mb-3" controlId="title">
-              <Form.Label>Title</Form.Label>
-              <Form.Control
-                type="title"
-                placeholder="Add book title here"
-                autoFocus
-                />
-            </Form.Group>
-            <Form.Group
-              className="mb-3"
-              controlId="description">
-              <Form.Label>Add description here</Form.Label>
-              <Form.Control as="textarea" rows={3} type='description'/>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="status">
-        <Form.Check type="checkbox" label="Available" />
-      </Form.Group>
-          <Button variant="primary" type="submit">
-          Save Changes
+    return (
+      <>
+        <Button variant="primary" onClick={this.handleShow}>
+          Add Books
         </Button>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          {/* <Button variant="secondary" onClick={this.handleClose}>
+        {/* <Button variant="dark" onClick={() => {this.props.deleteBooks(this.props.books)}}>Delete</Button> */}
+
+        <Modal show={this.state.setShow} onHide={this.handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Add your book here</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form onSubmit={this.handleBookSubmit}>
+              <Form.Group className="mb-3" controlId="title">
+                <Form.Label>Title</Form.Label>
+                <Form.Control
+                  type="title"
+                  placeholder="Add book title here"
+                  autoFocus
+                />
+              </Form.Group>
+              <Form.Group
+                className="mb-3"
+                controlId="description">
+                <Form.Label>Add description here</Form.Label>
+                <Form.Control as="textarea" rows={3} type='description' />
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="status">
+                <Form.Check type="checkbox" label="Available" />
+              </Form.Group>
+              <Button variant="primary" type="submit">
+                Save Changes
+              </Button>
+            </Form>
+          </Modal.Body>
+          <Modal.Footer>
+            {/* <Button variant="secondary" onClick={this.handleClose}>
             Close
           </Button> */}
-        </Modal.Footer>
-      </Modal>
-    </>
-  );
-}
+          </Modal.Footer>
+        </Modal>
+      </>
+    );
+  }
 }
 
 // render(<BookFormModal />);
