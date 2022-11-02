@@ -7,7 +7,7 @@ import Card from "react-bootstrap/Card";
 import BookFormModal from './BookFormModal.js';
 import { Button } from 'react-bootstrap';
 // import App from './App';
-import UpdateBookForm from './UpdateBookForm'
+import UpdateBookForm from './UpdateBookForm.js';
 
 
 class BestBooks extends React.Component {
@@ -113,7 +113,11 @@ updatedBooks = async (bookToUpdate) => {
        books={this.state.books}
        />
       </Container>
-
+      <Container>
+      <UpdateBookForm
+      updatebook={this.updatebook}
+      />
+      </Container>
       <Container fluid id="bestBooksContainer">
         {this.state.books.length > 0 ? 
         
