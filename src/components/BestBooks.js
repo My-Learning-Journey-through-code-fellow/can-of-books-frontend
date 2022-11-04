@@ -9,6 +9,8 @@ import { Button } from 'react-bootstrap';
 // import App from './App';
 import UpdateBookForm from './UpdateBookForm.js';
 
+import { withAuth0 } from '@auth0/auth0-react';
+
 
 class BestBooks extends React.Component {
   constructor(props) {
@@ -95,11 +97,36 @@ class BestBooks extends React.Component {
 
 
   //---------------------------------
+async componentDidMount(){
 
-  componentDidMount() {
-    this.getBooks();
-    console.log('component mounted');
+  if(this.props.auth0.isAuthenticated){
+    const res = await this.props.auth0.getIdTokenClaims();
+
+    const jwt = res.__raw;
+
+    console.log('token: ', jwt);
+
+    const config = {
+      headers: { "Authorization": `Bearer ${jwt}`},
+      method: 'get',
+      baseURL: process.env.REACT_APP_SERVER_URL,
+      url: '/books'
+    }
+    let bookData = await axios.get(config);
+
   }
+
+  this.setState({
+    books: bookData.data
+  })
+}
+
+
+ //------------------------------------ 
+  // componentDidMount() {
+  //   this.getBooks();
+  //   console.log('component mounted');
+  // }
   /* TODO: Make a GET request to your API to fetch all the books from the database  */
 
   render() {
@@ -169,4 +196,4 @@ class BestBooks extends React.Component {
   }
 }
 
-export default BestBooks;
+export default withAuth0(BestBooks);
